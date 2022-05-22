@@ -2,10 +2,9 @@ package com.adidev.breakingbad.ui.main
 
 
 import android.os.Bundle
-import android.view.LayoutInflater
+import android.view.*
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
-import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -35,6 +34,27 @@ class CharacterListFragment : Fragment() {
         viewModel.characterList.observe(viewLifecycleOwner){
             adapter.update(it)
         }
+        setHasOptionsMenu(true)
         return view
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+
+        inflater.inflate(R.menu.search_menu, menu)
+
+        (menu.findItem(R.id.actionSearch).actionView as SearchView).setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                // inside on query text change method we are
+                // calling a method to filter our recycler view.
+                (newText)
+                return false
+            }
+        })
+
+        super.onCreateOptionsMenu(menu, inflater)
     }
 }

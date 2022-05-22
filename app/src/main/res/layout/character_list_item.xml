@@ -10,14 +10,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="10dp"
+        android:padding="15dp"
         >
 
         <ImageView
             android:id="@+id/characterImage"
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:padding="5dp"
             android:layout_gravity="start|center_vertical"
              />
 

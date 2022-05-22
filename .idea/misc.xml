@@ -4,7 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Personal Projects/BreakingBad/app/src/main/res/layout/character_list_fragment.xml" value="0.1" />
-        <entry key="..\:/Personal Projects/BreakingBad/app/src/main/res/layout/character_list_item.xml" value="0.1" />
+        <entry key="..\:/Personal Projects/BreakingBad/app/src/main/res/layout/character_list_item.xml" value="0.25" />
+        <entry key="..\:/Personal Projects/BreakingBad/app/src/main/res/layout/main_activity.xml" value="0.11096014492753623" />
+        <entry key="..\:/Personal Projects/BreakingBad/app/src/main/res/menu/search_menu.xml" value="0.1" />
       </map>
     </option>
   </component>
