@@ -3,7 +3,8 @@ package com.adidev.breakingbad.ui.main
 
 import android.os.Bundle
 import android.view.*
-import android.widget.SearchView
+import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -31,7 +32,10 @@ class CharacterListFragment : Fragment() {
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context)
-        viewModel.characterList.observe(viewLifecycleOwner){
+        viewModel.visibleList.observe(viewLifecycleOwner){
+            if (it.isEmpty()){
+                Toast.makeText(context,"No characters found", Toast.LENGTH_SHORT).show()
+            }
             adapter.update(it)
         }
         setHasOptionsMenu(true)
@@ -50,7 +54,7 @@ class CharacterListFragment : Fragment() {
             override fun onQueryTextChange(newText: String): Boolean {
                 // inside on query text change method we are
                 // calling a method to filter our recycler view.
-                (newText)
+                viewModel.filter(newText)
                 return false
             }
         })
