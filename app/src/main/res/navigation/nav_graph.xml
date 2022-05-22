@@ -9,5 +9,20 @@
         android:id="@+id/characterListFragment"
         android:name="com.adidev.breakingbad.ui.main.CharacterListFragment"
         android:label="character_list_fragment"
-        tools:layout="@layout/character_list_fragment" />
+        tools:layout="@layout/character_list_fragment" >
+        <action
+            android:id="@+id/action_characterListFragment_to_characterDetailFragment2"
+            app:destination="@id/characterDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/characterDetailFragment"
+        android:name="com.adidev.breakingbad.ui.main.CharacterDetailFragment"
+        android:label="character_detail_fragment"
+        tools:layout="@layout/character_detail_fragment" >
+        <argument
+            android:name="character"
+            app:argType="com.adidev.breakingbad.data.Character"
+            />
+
+    </fragment>
 </navigation>
