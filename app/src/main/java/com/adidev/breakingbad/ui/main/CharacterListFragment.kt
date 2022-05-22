@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.adidev.breakingbad.BreakingBadApplication
@@ -28,7 +29,7 @@ class CharacterListFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.character_list_fragment, container, false)
         viewModel = ViewModelProvider(this, ViewModelFactory(requireActivity().application as BreakingBadApplication))[CharacterListViewModel::class.java]
-        val adapter = CharacterListAdapter()
+        val adapter = CharacterListAdapter(findNavController())
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context)
