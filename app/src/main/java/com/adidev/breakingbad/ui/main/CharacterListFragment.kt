@@ -3,10 +3,10 @@ package com.adidev.breakingbad.ui.main
 
 import android.os.Bundle
 import android.view.*
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -17,7 +17,7 @@ import com.adidev.breakingbad.R
 
 
 class CharacterListFragment : Fragment() {
-
+    private var currentDialog : DialogFragment? = null
     private lateinit var viewModel: CharacterListViewModel
 
     override fun onCreateView(
@@ -25,6 +25,7 @@ class CharacterListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val application: BreakingBadApplication = requireActivity().application as BreakingBadApplication
         val view = inflater.inflate(R.layout.character_list_fragment, container, false)
         viewModel = ViewModelProvider(this, ViewModelFactory(requireActivity().application as BreakingBadApplication))[CharacterListViewModel::class.java]
         val adapter = CharacterListAdapter(findNavController())
@@ -32,13 +33,13 @@ class CharacterListFragment : Fragment() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context)
         viewModel.visibleList.observe(viewLifecycleOwner){
+
             if (it.isEmpty()){
                 Toast.makeText(context,"No characters found", Toast.LENGTH_SHORT).show()
             }
             adapter.update(it)
         }
         setHasOptionsMenu(true)
-
 
         val toolbar = view.findViewById<Toolbar>(R.id.myToolbar)
         toolbar.inflateMenu(R.menu.search_menu)
@@ -62,6 +63,8 @@ class CharacterListFragment : Fragment() {
                 }
 
                 R.id.filter -> {
+                    currentDialog = FilterDialog(viewModel)
+                    currentDialog?.show(parentFragmentManager, javaClass.simpleName)
                     false
                 }
                 else -> false

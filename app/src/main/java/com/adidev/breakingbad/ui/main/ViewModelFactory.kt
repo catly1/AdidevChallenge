@@ -9,14 +9,11 @@ class ViewModelFactory(val application: BreakingBadApplication): ViewModelProvid
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         when {
-            (modelClass.isAssignableFrom(CharacterDetailViewModel::class.java)) -> {
-                return CharacterDetailViewModel(
-                    application.appContainer.breakingBadRepository
-                ) as T
-            }
             (modelClass.isAssignableFrom(CharacterListViewModel::class.java)) -> {
                 return CharacterListViewModel(
-                    application.appContainer.breakingBadRepository
+                    application.appContainer.breakingBadRepository,
+                    application.appContainer.characterList,
+                    application.appContainer.seasonFilter
                 ) as T
             }
         }
