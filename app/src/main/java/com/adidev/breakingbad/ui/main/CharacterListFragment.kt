@@ -1,11 +1,12 @@
 package com.adidev.breakingbad.ui.main
 
 
-import android.media.FaceDetector
 import android.os.Bundle
 import android.view.*
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -16,10 +17,6 @@ import com.adidev.breakingbad.R
 
 
 class CharacterListFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = CharacterListFragment()
-    }
 
     private lateinit var viewModel: CharacterListViewModel
 
@@ -41,30 +38,33 @@ class CharacterListFragment : Fragment() {
             adapter.update(it)
         }
         setHasOptionsMenu(true)
+
+
+        val toolbar = view.findViewById<Toolbar>(R.id.myToolbar)
+        toolbar.inflateMenu(R.menu.search_menu)
+        toolbar.setOnMenuItemClickListener {
+            when(it.itemId){
+                R.id.actionSearch -> {
+                    val searchView = (it.actionView as SearchView)
+//                    searchView.findViewById<ImageView>(androidx.appcompat.R.id.search_close_btn).setImageResource(
+//                        R.drawable.baseline_close_white_24dp)
+                    searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+                        override fun onQueryTextSubmit(query: String): Boolean {
+                            return false
+                        }
+
+                        override fun onQueryTextChange(newText: String): Boolean {
+                            viewModel.filter(newText)
+                            return false
+                        }
+                    })
+                    true
+                }
+                else -> false
+            }
+        }
+
+
         return view
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-
-        inflater.inflate(R.menu.search_menu, menu)
-
-        (menu.findItem(R.id.actionSearch).actionView as SearchView).setOnQueryTextListener(object : SearchView.OnQueryTextListener{
-            override fun onQueryTextSubmit(query: String): Boolean {
-                return false
-            }
-
-            override fun onQueryTextChange(newText: String): Boolean {
-                // inside on query text change method we are
-                // calling a method to filter our recycler view.
-                viewModel.filter(newText)
-                return false
-            }
-        })
-
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
     }
 }
