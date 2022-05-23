@@ -1,6 +1,7 @@
 package com.adidev.breakingbad.ui.main
 
 
+import android.media.FaceDetector
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
@@ -61,5 +62,9 @@ class CharacterListFragment : Fragment() {
         })
 
         super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
     }
 }

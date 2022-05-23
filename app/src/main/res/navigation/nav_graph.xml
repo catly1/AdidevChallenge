@@ -23,6 +23,9 @@
             android:name="character"
             app:argType="com.adidev.breakingbad.data.Character"
             />
+        <action
+            android:id="@+id/action_characterDetailFragment_to_characterListFragment"
+            app:destination="@id/characterListFragment" />
 
     </fragment>
 </navigation>
