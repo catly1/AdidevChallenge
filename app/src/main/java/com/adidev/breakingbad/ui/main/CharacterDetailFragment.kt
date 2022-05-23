@@ -2,9 +2,6 @@ package com.adidev.breakingbad.ui.main
 
 import android.os.Bundle
 import android.view.*
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -13,7 +10,6 @@ import com.adidev.breakingbad.data.Character
 import com.adidev.breakingbad.databinding.CharacterDetailFragmentBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.google.android.material.appbar.MaterialToolbar
 import com.msomu.glide.facetransformation.FaceCrop
 
 class CharacterDetailFragment: Fragment() {
