@@ -60,6 +60,10 @@ class CharacterListFragment : Fragment() {
                     })
                     true
                 }
+
+                R.id.filter -> {
+                    false
+                }
                 else -> false
             }
         }
