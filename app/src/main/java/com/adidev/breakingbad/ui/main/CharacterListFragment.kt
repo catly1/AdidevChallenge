@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.adidev.breakingbad.BreakingBadApplication
 import com.adidev.breakingbad.R
 import com.adidev.breakingbad.databinding.CharacterListFragmentBinding
+import com.adidev.breakingbad.util.CountingIdlingResourceSingleton
 
 
 class CharacterListFragment : Fragment() {
@@ -28,6 +29,7 @@ class CharacterListFragment : Fragment() {
         val view = inflater.inflate(R.layout.character_list_fragment, container, false)
         val binding: CharacterListFragmentBinding = DataBindingUtil.inflate(layoutInflater, R.layout.character_list_fragment, container, false)
         viewModel = ViewModelProvider(this, ViewModelFactory(requireActivity().application as BreakingBadApplication))[CharacterListViewModel::class.java]
+        CountingIdlingResourceSingleton.increment()
         val adapter = CharacterListAdapter(findNavController())
 
         binding.recyclerView.adapter = adapter
@@ -38,6 +40,7 @@ class CharacterListFragment : Fragment() {
                 Toast.makeText(context,"No characters found", Toast.LENGTH_SHORT).show()
             }
             adapter.update(it)
+            CountingIdlingResourceSingleton.decrement()
         }
         setHasOptionsMenu(true)
 
