@@ -6,6 +6,7 @@ import androidx.test.espresso.Espresso.pressBack
 import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -76,9 +77,8 @@ class CharacterListFragmentTest {
         onView(withId(R.id.checkBox5))
             .perform(ViewActions.click(), ViewActions.pressBack())
 
-        onView(withId(R.id.recyclerView)).perform(ViewActions.swipeUp(), ViewActions.swipeUp(), ViewActions.swipeUp(), ViewActions.swipeUp(), ViewActions.swipeUp(), ViewActions.swipeUp())
-
-        onView(withText("Duane Chow")).perform(ViewActions.click())
+        onView(withId(R.id.recyclerView)).perform(RecyclerViewActions.scrollTo<CharacterListAdapter.ItemViewHolder>(
+            hasDescendant(withText("Duane Chow")))).perform(ViewActions.click())
 
         onView(withId(R.id.characterSeasonAppearance)).check(matches(withText("3, 5")))
     }
